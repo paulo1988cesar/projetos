@@ -1,0 +1,42 @@
+﻿@model AppGamer.Models.PLATAFORMA
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+</br>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Exclusão de Plataforma</div>
+        <div class="panel-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label for="nome">Plataforma:</label>
+                        <div class="form-group">
+                            @Html.DisplayTextFor(model => model.DESCRICAO)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        @Html.ValidationSummary()
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <input type="submit" value="Delete" class="btn btn-primary" /> | @Html.ActionLink("Lista de Plataformas", "Index")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+}

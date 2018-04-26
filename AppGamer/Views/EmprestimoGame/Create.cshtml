@@ -1,0 +1,103 @@
+﻿@model AppGamer.Models.EMPRESTIMO
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#CODPLATAFORMA").change(function () {
+             var selectedItem = $(this).val();
+             var ddlGames = $("#CODGAME");
+
+             $.ajax({
+                 cache: false,
+                 type: "GET",
+                 url: "@(Url.RouteUrl("RetornaGameByPlataforma"))",
+                 data: { "codigo": selectedItem },
+                    success: function (data) {
+                        ddlGames.html('');
+                        
+                        $.each(data, function (id, option) {
+                            ddlGames.append($('<option></option>').val(option.codigo).html(option.descricao));
+                        });
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $('#msg').html("Ocorreu um erro inesperado. Contate o administrador do sistema.")
+                        $("#myModal").modal();
+                    }
+                });
+            });
+        });
+</script>
+
+</br>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Novo Empréstimo</div>
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="container-fluid">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <hr />
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label for="nome">Emprestar à:</label>
+                        <div class="form-group">
+                            @Html.DropDownList("CODUSER", null, "Selecione", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CODUSER, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="nome">Plataforma:</label>
+                        <div class="form-group">
+                            @Html.DropDownList("CODPLATAFORMA", null, "Selecione", htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="nome">Game:</label>
+                        <div class="form-group">
+                            @Html.DropDownList("CODGAME", null, "Selecione", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CODGAME, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group form-group-sm">
+                            <input type="submit" value="Salvar" class="btn btn-primary" /> | @Html.ActionLink("Lista de Games Emprestados", "Index")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">SGE - Aviso</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info">
+                    <label id="msg"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

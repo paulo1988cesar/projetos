@@ -1,0 +1,53 @@
+﻿@model AppGamer.Models.GAME
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+</br>
+<div class="panel panel-default">
+    <div class="panel-heading">Detalhes do Game: @Html.DisplayFor(model => model.DESCRICAO)</div>
+    <div class="panel-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label for="nome">Game:</label>
+                    <div class="form-group">
+                        @Html.DisplayTextFor(model => model.DESCRICAO)
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <label for="nome">Ano:</label>
+                    <div class="form-group">
+                        @Html.DisplayTextFor(model => model.ANO)
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <label for="nome">Título Emprestado:</label>
+                    <div class="form-group">
+                        @Html.DisplayFor(model => model.TITULOEMPRESTADO)
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <label for="nome">Plataforma:</label>
+                    <div class="form-group">
+                        @Html.DisplayTextFor(model => model.PLATAFORMA.DESCRICAO)
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        @Html.ActionLink("Editar", "Edit", new { id = Model.CODGAME }) | @Html.ActionLink("Lista de Games", "Index")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

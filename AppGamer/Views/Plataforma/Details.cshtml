@@ -1,0 +1,32 @@
+﻿@model AppGamer.Models.PLATAFORMA
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+</br>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Detalhes da Plataforma</div>
+    <div class="panel-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <label for="nome">Plataforma:</label>
+                    <div class="form-group">
+                        @Html.DisplayTextFor(model => model.DESCRICAO)
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        @Html.ActionLink("Editar", "Edit", new { id = Model.CODPLATAFORMA }) | @Html.ActionLink("Lista de Plataformas", "Index")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

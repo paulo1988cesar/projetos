@@ -1,0 +1,69 @@
+﻿@model AppGamer.Models.GAME
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+</br>
+<div class="panel panel-default">
+    <div class="panel-heading">Editar Game: @Html.DisplayFor(model => model.DESCRICAO)</div>
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="container-fluid">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.CODGAME)
+            
+            <hr />
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <label for="nome">Owner:</label>
+                    <div class="form-group">
+                        @Html.DropDownList("CODUSER", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                        @Html.HiddenFor(x => x.CODUSER)
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label for="nome">Game:</label>
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.DESCRICAO, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
+                        @Html.ValidationMessageFor(model => model.DESCRICAO, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <label for="nome">Ano:</label>
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.ANO, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
+                        @Html.ValidationMessageFor(model => model.ANO, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <label for="nome">Plataforma:</label>
+                    <div class="form-group">
+                        @Html.DropDownListFor(model => model.CODPLATAFORMA, null, "Selecione", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CODPLATAFORMA, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" /> | @Html.ActionLink("Lista de Games", "Index")
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
